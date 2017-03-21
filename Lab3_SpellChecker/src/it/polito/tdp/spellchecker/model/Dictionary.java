@@ -10,7 +10,7 @@ public class Dictionary {
 
 	private ArrayList<String> dizionarioInglese = new ArrayList<String>();
 	private ArrayList<String> dizionariaoItaliano = new ArrayList<String>();
-	private String language;
+	//private String language;
 
 	/**
 	 * Aggiunge un dizionario di una nuova lingua
@@ -21,7 +21,7 @@ public class Dictionary {
 	public void loadDictionary(String language) {
 		try {
 			FileReader fr;
-			this.language = language;
+			//this.language = language;
 
 			if (language.compareTo("inglese") == 0) {
 
@@ -51,16 +51,13 @@ public class Dictionary {
 		} catch (IOException e) {
 			System.out.println("Errore nella lettura del file");
 		}
-
 	}
 
 	public List<RichWord> spellCheckText(List<String> inputTextList) {
 
-		ArrayList<String> input = new ArrayList<String>(inputTextList);
-
 		ArrayList<RichWord> output = new ArrayList<RichWord>();
 
-		for (String s : input) {
+		for (String s : inputTextList) {
 			if (dizionarioInglese.contains(s) || dizionariaoItaliano.contains(s)) {
 				output.add(new RichWord(s, true));
 			} else {
@@ -69,33 +66,40 @@ public class Dictionary {
 			}
 
 		}
-		
-		
-	/*	int confronto;
-		for (String s : input) {
-			if (language.compareTo("inglese") == 0) {
-				confronto = s.compareTo(dizionarioInglese.get(dizionarioInglese.size() / 2));
-				if(confronto == 0){
-					
-				}
-				
-				if (confronto > 0) {
-                   for(int y = (dizionarioInglese.size()/2); y < dizionarioInglese.size(); y++){
-                	   confronto = s.compareTo(dizionarioInglese.get(dizionarioInglese.size() / 4));
-                	     if(confronto > 0){
-                	    	 for(int z = (dizionarioInglese.size()/4); z < dizionarioInglese.size(); z++))
-                	     }
-                   }
-				}
-
-			} else if (language.compareTo("italiano") == 0) {
-
-			}
-
-		}*/
-
 		return output;
 
 	}
+	
+	public int spellCheckText(ArrayList<String> inputTextList,String daCercare){
+		int p, u , m;
+		
+		p = 0;
+		
+		u = inputTextList.size() -1 ;
+		
+		while( p <= u){
+			m = (p+u)/2;
+			if(inputTextList.get(m).compareTo(daCercare) == 0 ){
+				return m;
+			}else if(inputTextList.get(m).compareTo(daCercare) < 0){
+				p = m+1;
+			}
+			else
+				u = m-1;	
+		}
+		
+		return -1;
+		
+	}
+
+	public ArrayList<String> getDizionarioInglese() {
+		return dizionarioInglese;
+	}
+
+	public ArrayList<String> getDizionariaoItaliano() {
+		return dizionariaoItaliano;
+	}
+	
+	
 
 }
