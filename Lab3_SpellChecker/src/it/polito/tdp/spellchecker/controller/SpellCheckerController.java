@@ -13,6 +13,7 @@ import it.polito.tdp.spellchecker.model.RichWord;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
@@ -40,6 +41,9 @@ public class SpellCheckerController {
 
 	@FXML // fx:id="txtTempEsecuzione"
 	private TextField txtTempEsecuzione; // Value injected by FXMLLoader
+	
+	  @FXML
+	    private Label txtTempEsecuzione2;
 
 	@FXML
 	void doClearText(ActionEvent event) {
@@ -52,7 +56,7 @@ public class SpellCheckerController {
 	}
 
 	@FXML
-	void doSpellCheck(ActionEvent event) {
+	void doSpellCheck(ActionEvent event) throws Exception {
 
 		// Misuro il tempo di esecuzione del metodo
 		long t1 = System.nanoTime();
@@ -67,8 +71,9 @@ public class SpellCheckerController {
 		ArrayList<String> inputList = new ArrayList<String>();
 
 		for (int i = 0; i < input.length; i++) {
-			inputList.add(input[i]);
+			inputList.add(input[i].replaceAll("[ \\p{Punct}]", ""));
 		}
+		
 
 		int errori = 0;
 		for (RichWord r : model.spellCheckText(inputList))
@@ -80,8 +85,26 @@ public class SpellCheckerController {
 		// Misuo il tempo di esecuzione del metodo
 		long t2 = System.nanoTime();
 
+		
 		txtError.setText("The text contains " + errori + " errors");
         txtTempEsecuzione.setText("SpellCheck completed in "+((t2-t1)/1e9)+" seconds");
+        
+        long t3 = System.nanoTime();
+        
+        	for (String s : inputList) {
+    			int m = model.spellCheckText(s);
+    			
+
+    			if (m == -1) {
+    				System.out.println("La parola " + s + " non è stata trovata");
+    			} else
+    				System.out.println(model.getDizionario().get(m));
+
+    		}
+        	
+        long t4 = System.nanoTime();
+        
+        txtTempEsecuzione2.setText("SpellCheck completed in "+((t4-t3)/1e9)+" seconds");
 	}
 
 	@FXML // This method is called by the FXMLLoader when initialization is

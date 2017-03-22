@@ -41,7 +41,7 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <TextArea fx:id="txtInput">
+                  <TextArea fx:id="txtInput" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
@@ -92,6 +92,10 @@
                         <Insets bottom="5.0" left="5.0" />
                      </HBox.margin>
                   </TextField>
+                  <Label fx:id="txtTempEsecuzione2" prefHeight="20.0" prefWidth="270.0" text="Label">
+                     <HBox.margin>
+                        <Insets left="5.0" right="5.0" />
+                     </HBox.margin></Label>
                </children>
             </HBox>
          </children>
