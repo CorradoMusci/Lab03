@@ -2,6 +2,8 @@ package it.polito.tdp.spellchecker.model;
 
 import java.util.ArrayList;
 
+
+
 public class TestModel {
 
 	public static void main(String[] args) throws Exception {
@@ -12,30 +14,42 @@ public class TestModel {
 		d.loadDictionary("inglese");
 		d.loadDictionary("italiano");
 
-	
-
 		ArrayList<String> prova = new ArrayList<String>();
 
 		prova.add("ciao");
 		prova.add("bello");
 		prova.add("ggsdfs");
 
-		ArrayList<RichWord> output = new ArrayList<RichWord>(d.spellCheckText(prova));
-
-		for (RichWord r : output) {
-			System.out.println("La parola è " + r.toString());
+		for (int i = 0; i < 100000; i++) {
+			prova.add("ciao");
 		}
-
+		long t0 = System.nanoTime();
+		
+		ArrayList<RichWord> output = new ArrayList<RichWord>(d.spellCheckText(prova));
+        
+		long t1 = System.nanoTime();
+		
+                                     
+	/*	for (RichWord r : output) {
+			System.out.println("La parola è " + r.toString());
+		}*/
+	
 		// STO PROVANDO IL NUOVO ALGORITMO
 		for (String s : prova) {
 			int m = d.spellCheckText(s);
+			/*
+			  if (m == -1) { 
+			  	System.out.println("La parola " + s +  " non è stata trovata"); 
+			  } else
+			  		System.out.println(d.getDizionario().get(m));
+			 
 
-			if (m == -1) {
-				System.out.println("La parola " + s + " non è stata trovata");
-			} else
-				System.out.println(d.getDizionario().get(m));
-
+		}*/
 		}
+		long t2 = System.nanoTime();
+
+		System.out.println("il primo metodo ha tempo : " + ((t1 - t0) / 1e9) + "\nil secondo metodo ha tempo : "
+				+ ((t2 - t1) / 1e9));
 
 	}
 

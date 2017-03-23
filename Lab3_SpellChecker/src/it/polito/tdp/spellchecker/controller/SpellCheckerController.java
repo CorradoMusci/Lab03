@@ -41,9 +41,9 @@ public class SpellCheckerController {
 
 	@FXML // fx:id="txtTempEsecuzione"
 	private TextField txtTempEsecuzione; // Value injected by FXMLLoader
-	
-	  @FXML
-	    private Label txtTempEsecuzione2;
+
+	@FXML
+	private Label txtTempEsecuzione2;
 
 	@FXML
 	void doClearText(ActionEvent event) {
@@ -52,14 +52,12 @@ public class SpellCheckerController {
 		txtResult.clear();
 		txtError.clear();
 		txtTempEsecuzione.clear();
+		txtTempEsecuzione2.setText("");
 
 	}
 
 	@FXML
 	void doSpellCheck(ActionEvent event) throws Exception {
-
-		// Misuro il tempo di esecuzione del metodo
-		long t1 = System.nanoTime();
 
 		// Scelgo la lingua
 		String lingua = boxLingua.getValue();
@@ -71,9 +69,11 @@ public class SpellCheckerController {
 		ArrayList<String> inputList = new ArrayList<String>();
 
 		for (int i = 0; i < input.length; i++) {
-			inputList.add(input[i].replaceAll("[ \\p{Punct}]", ""));
+			inputList.add(input[i].toLowerCase().replaceAll("[ \\p{Punct}]", ""));
 		}
-		
+
+		// Misuro il tempo di esecuzione del metodo
+		long t1 = System.nanoTime();
 
 		int errori = 0;
 		for (RichWord r : model.spellCheckText(inputList))
@@ -82,29 +82,31 @@ public class SpellCheckerController {
 				errori++;
 			}
 
-		// Misuo il tempo di esecuzione del metodo
+		// Misuro il tempo di esecuzione del metodo {Conclusione del primo ed
+		// inizio del secondo)
 		long t2 = System.nanoTime();
 
-		
+		for (String s : inputList) {
+			int m = model.spellCheckText(s);
+
+			if (m == -1) {
+				// System.out.println("La parola " + s + " non è stata
+				// trovata");
+				txtResult.appendText(s.toString() + "\n");
+			} // else
+				// System.out.println(model.getDizionario().get(m));
+				// txtResult.appendText(s.toString() + "\n");
+
+		}
+
+		long t3 = System.nanoTime();
+
 		txtError.setText("The text contains " + errori + " errors");
-        txtTempEsecuzione.setText("SpellCheck completed in "+((t2-t1)/1e9)+" seconds");
-        
-        long t3 = System.nanoTime();
-        
-        	for (String s : inputList) {
-    			int m = model.spellCheckText(s);
-    			
 
-    			if (m == -1) {
-    				System.out.println("La parola " + s + " non è stata trovata");
-    			} else
-    				System.out.println(model.getDizionario().get(m));
+		txtTempEsecuzione.setText("SpellCheck completed in " + ((t2 - t1) / 1e9) + " seconds");
 
-    		}
-        	
-        long t4 = System.nanoTime();
-        
-        txtTempEsecuzione2.setText("SpellCheck completed in "+((t4-t3)/1e9)+" seconds");
+		txtTempEsecuzione2.setText("SpellCheck completed in " + ((t3 - t2) / 1e9) + " seconds");
+
 	}
 
 	@FXML // This method is called by the FXMLLoader when initialization is

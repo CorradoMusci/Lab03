@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polito.tdp.spellchecker.controller.SpellCheckerController">
+<BorderPane prefHeight="374.0" prefWidth="665.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polito.tdp.spellchecker.controller.SpellCheckerController">
    <top>
       <Label text="Lab3_SpellChecker" BorderPane.alignment="CENTER">
          <font>
@@ -23,7 +23,7 @@
       </Label>
    </top>
    <center>
-      <VBox spacing="5.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="262.0" prefWidth="475.0" spacing="5.0" BorderPane.alignment="CENTER">
          <children>
             <HBox spacing="5.0">
                <children>
@@ -66,7 +66,7 @@
                   </Label>
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="55.0" prefWidth="487.0">
                <children>
                   <TextArea fx:id="txtResult">
                      <HBox.margin>
@@ -77,7 +77,7 @@
             </HBox>
             <HBox alignment="TOP_RIGHT">
                <children>
-                  <TextField fx:id="txtError" alignment="TOP_RIGHT" />
+                  <TextField fx:id="txtError" alignment="TOP_RIGHT" prefHeight="25.0" prefWidth="253.0" />
                   <Button mnemonicParsing="false" onAction="#doClearText" text="ClearText">
                      <HBox.margin>
                         <Insets left="5.0" right="5.0" />
@@ -85,14 +85,14 @@
                   </Button>
                </children>
             </HBox>
-            <HBox>
+            <HBox prefHeight="50.0" prefWidth="490.0">
                <children>
-                  <TextField fx:id="txtTempEsecuzione" prefHeight="25.0" prefWidth="248.0">
+                  <TextField fx:id="txtTempEsecuzione" prefHeight="25.0" prefWidth="323.0">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" />
                      </HBox.margin>
                   </TextField>
-                  <Label fx:id="txtTempEsecuzione2" prefHeight="20.0" prefWidth="270.0" text="Label">
+                  <Label fx:id="txtTempEsecuzione2" prefHeight="17.0" prefWidth="327.0" textFill="#ff0202" textOverrun="WORD_ELLIPSIS">
                      <HBox.margin>
                         <Insets left="5.0" right="5.0" />
                      </HBox.margin></Label>
