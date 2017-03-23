@@ -6,11 +6,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 public class Dictionary {
 
-	HashMap<String, ArrayList<String>> dizionari = new HashMap<>();
+   // HashMap<String, ArrayList<String>> dizionari = new HashMap<>();
+	 HashMap<String, HashSet<String>> dizionari = new HashMap<>();
 	String linguaCorrente;
 
 	/**
@@ -20,7 +22,7 @@ public class Dictionary {
 	 */
 
 	public void loadDictionary(String language) {
-		ArrayList<String> dizionario = new ArrayList<String>();
+		HashSet<String> dizionario = new HashSet<String>();
 		if (!dizionari.containsKey(language)) {
 			try {
 
@@ -47,32 +49,32 @@ public class Dictionary {
 			} catch (IOException e) {
 				System.out.println("Errore nella lettura del file");
 			}
-			Collections.sort(dizionario);
+			
 			dizionari.put(language, dizionario);
 
 		}
 		linguaCorrente = language;
 	}
 
-	public List<RichWord> spellCheckText(List<String> inputTextList) throws Exception {
+	public ArrayList<RichWord> spellCheckText(List<String> inputTextList) throws Exception {
 
 		ArrayList<RichWord> output = new ArrayList<RichWord>();
 
 		for (String s : inputTextList) {
 
-			if (dizionari.get(linguaCorrente).contains(s)) {
+			if (!dizionari.get(linguaCorrente).contains(s)) {
 				output.add(new RichWord(s, true));
-			} else {
+		/*	} else {
 				output.add(new RichWord(s, false));
 
-			}
+			}*/
 		}
-
-		return output;
+	}
+	    return output;
 
 	}
 
-	public int spellCheckText(String daCercare) {
+/*	public int spellCheckText(String daCercare) {
 		int p, u, m;
 
 		p = 0;
@@ -91,9 +93,9 @@ public class Dictionary {
 
 		return -1;
 
-	}
+	}*/
 
-	public ArrayList<String> getDizionario() {
+	public HashSet<String> getDizionario() {
 		return dizionari.get(linguaCorrente);
 	}
 

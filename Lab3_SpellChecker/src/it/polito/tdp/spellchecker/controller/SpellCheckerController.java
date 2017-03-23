@@ -76,17 +76,17 @@ public class SpellCheckerController {
 		long t1 = System.nanoTime();
 
 		int errori = 0;
-		for (RichWord r : model.spellCheckText(inputList))
-			if (r.isCorretta() == false) {
+		for (RichWord r : model.spellCheckText(inputList)){
+			//if (r.isCorretta() == false) {
 				txtResult.appendText(r.toString() + "\n");
 				errori++;
-			}
+		}	
 
 		// Misuro il tempo di esecuzione del metodo {Conclusione del primo ed
 		// inizio del secondo)
 		long t2 = System.nanoTime();
 
-		for (String s : inputList) {
+	/*	for (String s : inputList) {
 			int m = model.spellCheckText(s);
 
 			if (m == -1) {
@@ -97,7 +97,7 @@ public class SpellCheckerController {
 				// System.out.println(model.getDizionario().get(m));
 				// txtResult.appendText(s.toString() + "\n");
 
-		}
+		}*/
 
 		long t3 = System.nanoTime();
 
@@ -105,7 +105,7 @@ public class SpellCheckerController {
 
 		txtTempEsecuzione.setText("SpellCheck completed in " + ((t2 - t1) / 1e9) + " seconds");
 
-		txtTempEsecuzione2.setText("SpellCheck completed in " + ((t3 - t2) / 1e9) + " seconds");
+	//	txtTempEsecuzione2.setText("SpellCheck completed in " + ((t3 - t2) / 1e9) + " seconds");
 
 	}
 

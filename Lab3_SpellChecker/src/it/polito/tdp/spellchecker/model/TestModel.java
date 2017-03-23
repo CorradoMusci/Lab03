@@ -1,6 +1,7 @@
 package it.polito.tdp.spellchecker.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 
 
@@ -20,12 +21,12 @@ public class TestModel {
 		prova.add("bello");
 		prova.add("ggsdfs");
 
-		for (int i = 0; i < 100000; i++) {
+		for (int i = 0; i < 10000000; i++) {
 			prova.add("ciao");
 		}
 		long t0 = System.nanoTime();
 		
-		ArrayList<RichWord> output = new ArrayList<RichWord>(d.spellCheckText(prova));
+		ArrayList<RichWord> output =  d.spellCheckText(prova);
         
 		long t1 = System.nanoTime();
 		
@@ -35,7 +36,7 @@ public class TestModel {
 		}*/
 	
 		// STO PROVANDO IL NUOVO ALGORITMO
-		for (String s : prova) {
+	/*	for (String s : prova) {
 			int m = d.spellCheckText(s);
 			/*
 			  if (m == -1) { 
@@ -45,7 +46,7 @@ public class TestModel {
 			 
 
 		}*/
-		}
+		
 		long t2 = System.nanoTime();
 
 		System.out.println("il primo metodo ha tempo : " + ((t1 - t0) / 1e9) + "\nil secondo metodo ha tempo : "
